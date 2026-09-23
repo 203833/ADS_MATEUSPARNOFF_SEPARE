@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: separe-api
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/separe
+      auto-index-creation: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:seu-email@gmail.com}
+    password: ${MAIL_PASSWORD:sua-senha-de-app}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# JWT
+app:
+  jwt:
+    secret: ${JWT_SECRET:SepareSecretKeyParaDesenvolvimento2026MuitoSeguraComMaisDe256Bits!}
+    expiracao-ms: 86400000 # 24 horas
+
+# Springdoc / Swagger
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+# Logging
+logging:
+  level:
+    com.separe: DEBUG
+    org.springframework.data.mongodb: INFO
